@@ -2,18 +2,17 @@ name: deploy on push
 on: [push]
 
 jobs:
-deploy-app: 
-runs-on: ubantu-latest 
-steps: 
--name: check out the code to build server
-users: actions/checkout@v3
--name: copy file to server 
-users: appleboy/scp-action@master 
-with: 
-host: ${{secrets.HOST}}
-username: ${{secrets.SSH_USER_NAME}}
-port: ${{secrets.SSH_PORT}}
-key: ${{secrets.SSH_KEY}}
-source: "./html/*"
-target: "/var/www/html"
-strip_components: 1
+  runs-on: ubantu-latest 
+  steps: 
+    - name: check out the code to build server
+      users: actions/checkout@v3
+    - name: copy file to server 
+      users: appleboy/scp-action@master 
+      with: 
+        host: ${{secrets.HOST}}
+        username: ${{secrets.SSH_USER_NAME}}
+        port: ${{secrets.SSH_PORT}}
+        key: ${{secrets.SSH_KEY}}
+        source: "./html/*"
+        target: "/var/www/html"
+        strip_components: 1
